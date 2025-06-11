@@ -1,0 +1,211 @@
+app:
+  name: "tron"
+  env: "dev"
+  version: "v0.0.0"
+  host: "127.0.0.1"
+  enableStat: true
+  enableMetrics: true
+  enableHTTPProfile: true
+  enableLimit: true
+  enableCircuitBreaker: true
+  enableTrace: false
+  tracingSamplingRate: 1.0
+  sutdownTimeoutSecond: 30
+  cacheType: "redis"
+
+http:
+  port: 8180
+  timeout: 30
+
+logger:
+  level: "info"
+  format: "console"
+  isSave: false
+  logFileConfig:
+    filename: "out.log"
+    maxSize: 20
+    maxBackups: 50
+    maxAge: 15
+    isCompression: true
+
+
+database:
+  driver: "mysql"
+  cMysql:
+    dsn: "tron:tron123456!@(127.0.0.1:3306)/itc?parseTime=true&loc=Local&charset=utf8,utf8mb4"
+    enableLog: true
+    maxIdleConns: 10
+    maxOpenConns: 100
+    connMaxLifetime: 30
+  aMysql:
+    dsn: "tron:tron123456!@(127.0.0.1:3306)/ita?parseTime=true&loc=Local&charset=utf8,utf8mb4"
+    enableLog: true
+    maxIdleConns: 10
+    maxOpenConns: 100
+    connMaxLifetime: 30
+
+  bMysql:
+    dsn: "tron:tron123456!@(127.0.0.1:3306)/itb?parseTime=true&loc=Local&charset=utf8,utf8mb4"
+    enableLog: true
+    maxIdleConns: 10
+    maxOpenConns: 100
+    connMaxLifetime: 30
+
+  fMysql:
+    dsn: "tron:tron123456!@(127.0.0.1:3306)/itf?parseTime=true&loc=Local&charset=utf8,utf8mb4"
+    enableLog: true
+    maxIdleConns: 10
+    maxOpenConns: 100
+    connMaxLifetime: 30
+
+redis:
+  dsn: "default:w48690812@127.0.0.1:6479/0"
+  dialTimeout: 10
+  readTimeout: 2
+  writeTimeout: 2
+  queueConfig:
+    stream: "order_events"
+    group: "order_processing_group"
+    dlqStream: "order_dlq"
+    maxRetries: 3
+    consumerName: "consumer-"
+    blockTimeout: 5
+    pendingCheckInterval: 5
+    maxPendingAge: 30
+
+
+# jaeger settings
+jaeger:
+  agentHost: "127.0.0.1"
+  agentPort: 6831
+
+tronGas:
+  baseUrl: "https://www.trongas.org/api/v2/orders"
+  apiKey: "2aThSHqm2VZEKvLzpirlcobc9zextSKau/m4iErUlh+OBumFSVoJt2xAtNOcpKo3iPflE1+30y7P5hRW/AEs/Q=="
+
+pollingService:
+  matcherPollerInterval: 60 #轮询时间 60s
+  matcherPollerBatchSize: 50 #10 (每次轮询处理的订单数量)
+  matcherName: "pendingMatch" #用于生成唯一的 matcherID 前缀
+  matcherLockTimeout: 40 # 订单锁定超时时间 120s
+  matcherPollerMaxWorkers: 3 #并发处理订单数
+  matcherPollerSingleOrderTimeout: 50 #单个订单匹配+处理的超时 20s
+  matcherPollerShutdownTimeout: 3 #轮询服务优雅关闭的超时时间 10s
+
+chain:
+  mainAddresses:
+    address: "TKHvt8joNtDb7k957GoqCS6dp5KDJuD456"
+    privateKey: "DsT20dOCkFzoySK2jqo0VA1vcL0uUNjAcgPZr7PLu/eCB3s+U10jut3PIcRpd/19NOuGnNX3OCfq3utxWEg1HMQl8jkyeY/n2mS31MqPndc="
+    userId: "c409f11c-8aaf-41ea-a2b1-30c57a6ec5ab"
+    usdt: 5000000000     # 主地址USDT余额低于此值时触发补足告警
+    trx: 1000000000      # 主地址TRX余额低于此值时触发补足告警 => sun
+
+  currentNodePreference: "selfBuilt"
+  official:
+    - url: "grpc.nile.trongrid.io:50051" # testnet
+      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
+      timeOut: 15
+    - url: "grpc.nile.trongrid.io:50051" # testnet
+      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
+      timeOut: 15
+    - url: "grpc.nile.trongrid.io:50051" # testnet
+      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
+      timeOut: 15
+  selfBuilt:
+    - url: "grpc.nile.trongrid.io:50051" # testnet
+      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
+      timeOut: 15
+    - url: "grpc.nile.trongrid.io:50051" # testnet
+      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
+      timeOut: 15
+    - url: "grpc.nile.trongrid.io:50051" # testnet
+      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
+      timeOut: 15
+  thirdParty:
+    - url: "grpc.nile.trongrid.io:50051" # testnet
+      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
+      timeOut: 15
+    - url: "grpc.nile.trongrid.io:50051" # testnet
+      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
+      timeOut: 15
+    - url: "grpc.nile.trongrid.io:50051" # testnet
+      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
+      timeOut: 15
+
+  contracts:
+    - name: "USDT"
+      type: "trc20"
+      #    contract: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+      contract: "TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf"
+      #    issuer: "THPvaUhoh2Qn2y9THCZML3H815hhFhn5YC"
+      issuer: "TKGRE6oiU3rEzasue4MsB6sCXXSTx9BAe3"
+      decimal: 6
+    - name: "BTT"
+      type: "trc10"
+      contract: "1002000"
+      issuer: "TF5Bn4cJCT6GVeUgyCN4rBhDg42KBrpAjg"
+  feeLimit: 15000
+  orderWorker: 5
+
+
+  # 能量调用模式配置
+  energyDetector:
+    enable: true
+    pollIntervalSeconds: 3
+    blockWindow: 3
+    # 0.1 to 2.0 TRX in SUN (1 TRX = 1,000,000 SUN)
+    targetTrxAmountsSun:
+      - 100000
+      - 200000
+      - 300000
+      - 400000
+      - 500000
+      - 600000
+      - 700000
+      - 800000
+      - 900000
+      - 1000000
+      - 1100000
+      - 1200000
+      - 1300000
+      - 1400000
+      - 1500000
+      - 1600000
+      - 1700000
+      - 1800000
+      - 1900000
+      - 2000000
+    minEnergyReceived: 60000
+    maxEnergyReceived: 70000
+    cachePruneIntervalMinutes: 10
+    initialScanBlockOffset: 100 # 首次启动回扫100个块
+    initialScanBlock: 57548951 # 区块开始高度
+    persistLastBlockKey: "energy_detector:last_processed_block"
+    baseEnergy: 65000
+    emptyAddressEnergy: 131000
+    maxTrxCost: 500000    # 允许的最大TRX消耗量 sun
+    sunPerEnergy: 200  # 1带宽≈200 SUN
+    energyConfirmTimeoutSec: 6 #s
+    energyConfirmIntervalSec: 3  #s
+    energyCallRetryDelayHours: 48  #h
+
+
+
+  platform: #平台
+    - platformName: "catFee"
+      apiKey: "87053945-fcc2-4029-8431-0ce2cc8b446b"
+      apiSecret: "e9cae7bb6296f877eb0e03269432806d"
+      baseURL: "https://nile.catfee.io"
+      rentDurationMinutes: 1h  #1h
+
+
+  # 转账规则参数
+  transferRules:
+    activationTrx: 2000000            # 地址激活所需TRX
+    usdtSupplyAmount: 1000000000     # USDT划转量
+    trxSupplyAmount: 2500000       # TRX补充量
+    maxPerTransfer: 1000000000       # 单笔限额（USDT）
+    minTargetBalance: 100000000      # 目标地址最低余额（USDT）
+    matchTimeWindow: 30        # 匹配订单时间窗口（分钟）
+    dailyMaxTransfers: 3       # 日最大转账次数
+    cztimes2Timeout: 10         # CZtimes=2的超时时间（分钟）
