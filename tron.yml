@@ -14,13 +14,13 @@ app:
   cacheType: "redis"
 
 http:
-  port: 8180
+  port: 8080
   timeout: 30
 
 logger:
-  level: "info"
+  level: "debug"
   format: "console"
-  isSave: false
+  isSave: true
   logFileConfig:
     filename: "out.log"
     maxSize: 20
@@ -32,27 +32,27 @@ logger:
 database:
   driver: "mysql"
   cMysql:
-    dsn: "tron:tron123456!@(127.0.0.1:3306)/itc?parseTime=true&loc=Local&charset=utf8,utf8mb4"
+    dsn: "root:bivdex123456@(127.0.0.1:3306)/itc?parseTime=true&loc=Local&charset=utf8,utf8mb4"
     enableLog: true
     maxIdleConns: 10
     maxOpenConns: 100
     connMaxLifetime: 30
   aMysql:
-    dsn: "tron:tron123456!@(127.0.0.1:3306)/ita?parseTime=true&loc=Local&charset=utf8,utf8mb4"
+    dsn: "root:bivdex123456@(127.0.0.1:3306)/ita?parseTime=true&loc=Local&charset=utf8,utf8mb4"
     enableLog: true
     maxIdleConns: 10
     maxOpenConns: 100
     connMaxLifetime: 30
 
   bMysql:
-    dsn: "tron:tron123456!@(127.0.0.1:3306)/itb?parseTime=true&loc=Local&charset=utf8,utf8mb4"
+    dsn: "root:bivdex123456@(127.0.0.1:3306)/itb?parseTime=true&loc=Local&charset=utf8,utf8mb4"
     enableLog: true
     maxIdleConns: 10
     maxOpenConns: 100
     connMaxLifetime: 30
 
   fMysql:
-    dsn: "tron:tron123456!@(127.0.0.1:3306)/itf?parseTime=true&loc=Local&charset=utf8,utf8mb4"
+    dsn: "root:bivdex123456@(127.0.0.1:3306)/itf?parseTime=true&loc=Local&charset=utf8,utf8mb4"
     enableLog: true
     maxIdleConns: 10
     maxOpenConns: 100
