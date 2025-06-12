@@ -59,7 +59,7 @@ database:
     connMaxLifetime: 30
 
 redis:
-  dsn: "default:w48690812@127.0.0.1:6479/0"
+  dsn: "default:w48690812@127.0.0.1:6379/0"
   dialTimeout: 10
   readTimeout: 2
   writeTimeout: 2
