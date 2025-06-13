@@ -18,7 +18,7 @@ http:
   timeout: 30
 
 logger:
-  level: "debug"
+  level: "info"
   format: "console"
   isSave: true
   logFileConfig:
@@ -80,65 +80,58 @@ jaeger:
   agentPort: 6831
 
 tronGas:
-  baseUrl: "https://www.trongas.org/api/v2/orders"
-  apiKey: "2aThSHqm2VZEKvLzpirlcobc9zextSKau/m4iErUlh+OBumFSVoJt2xAtNOcpKo3iPflE1+30y7P5hRW/AEs/Q=="
+  baseUrl: ""
+  apiKey: ""
 
 pollingService:
-  matcherPollerInterval: 60 #轮询时间 60s
-  matcherPollerBatchSize: 50 #10 (每次轮询处理的订单数量)
+  matcherPollerInterval: 30 #轮询时间 60s
+  matcherPollerBatchSize: 20 #10 (每次轮询处理的订单数量)
   matcherName: "pendingMatch" #用于生成唯一的 matcherID 前缀
-  matcherLockTimeout: 40 # 订单锁定超时时间 120s
+  matcherLockTimeout: 20 # 订单锁定超时时间 120s
   matcherPollerMaxWorkers: 3 #并发处理订单数
-  matcherPollerSingleOrderTimeout: 50 #单个订单匹配+处理的超时 20s
+  matcherPollerSingleOrderTimeout: 25 #单个订单匹配+处理的超时 20s
   matcherPollerShutdownTimeout: 3 #轮询服务优雅关闭的超时时间 10s
 
 chain:
   mainAddresses:
-    address: "TKHvt8joNtDb7k957GoqCS6dp5KDJuD456"
-    privateKey: "DsT20dOCkFzoySK2jqo0VA1vcL0uUNjAcgPZr7PLu/eCB3s+U10jut3PIcRpd/19NOuGnNX3OCfq3utxWEg1HMQl8jkyeY/n2mS31MqPndc="
-    userId: "c409f11c-8aaf-41ea-a2b1-30c57a6ec5ab"
-    usdt: 5000000000     # 主地址USDT余额低于此值时触发补足告警
-    trx: 1000000000      # 主地址TRX余额低于此值时触发补足告警 => sun
+    address: "TW7MZp8AJZPNbzJb2SCEMiFKz2oj6prRn1"
+    privateKey: "BzQYgwHU9gvH+Rm/KcG1bMBwB9iQxqq2Y1VJ3bbokgfW7peIPNx9eqPtwM4/MBMW6+PUYKxEmsqZ+KHKvRQrCjVy6x4aSUzmAq6UAplugzc="
+    userId: "ca609288-a87a-490b-b630-809cb29d1506"
+    usdt: 50000     # 主地址USDT余额低于此值时触发补足告警
+    trx: 10000      # 主地址TRX余额低于此值时触发补足告警 => sun
 
   currentNodePreference: "selfBuilt"
   official:
-    - url: "grpc.nile.trongrid.io:50051" # testnet
-      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
+    - url: "grpc.trongrid.io:50051"
+      apiKey: "18b3dea4-55ec-424f-b3c1-ffdd9264e00d"
       timeOut: 15
-    - url: "grpc.nile.trongrid.io:50051" # testnet
-      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
+    - url: "grpc.trongrid.io:50051"
+      apiKey: "445a6d39-2ceb-4e41-98d2-17f2a9d19fcf"
       timeOut: 15
-    - url: "grpc.nile.trongrid.io:50051" # testnet
-      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
+    - url: "grpc.trongrid.io:50051"
+      apiKey: "de0daace-7ea6-40c3-bd9f-3851cffec9e4"
       timeOut: 15
   selfBuilt:
-    - url: "grpc.nile.trongrid.io:50051" # testnet
-      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
+    - url: "grpc.trongrid.io:50051"
+      apiKey: "7fb4edd3-7639-4122-a953-9f62a24b448a"
       timeOut: 15
-    - url: "grpc.nile.trongrid.io:50051" # testnet
-      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
+    - url: "grpc.trongrid.io:50051"
+      apiKey: "150debee-e301-4de8-b3e8-bac5dc523c48"
       timeOut: 15
-    - url: "grpc.nile.trongrid.io:50051" # testnet
-      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
+    - url: "grpc.trongrid.io:50051"
+      apiKey: "bcbf4b0f-0fcd-4ccf-9ab0-4e2e2defa134"
       timeOut: 15
   thirdParty:
-    - url: "grpc.nile.trongrid.io:50051" # testnet
-      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
+    - url: "grpc.trongrid.io:50051"
+      apiKey: "4f5a5d53-6068-4b5e-9626-8341aae0b786"
       timeOut: 15
-    - url: "grpc.nile.trongrid.io:50051" # testnet
-      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
-      timeOut: 15
-    - url: "grpc.nile.trongrid.io:50051" # testnet
-      apiKey: "12ad61d9-fb36-47a1-8d09-79ecac99fc73"
-      timeOut: 15
+
 
   contracts:
     - name: "USDT"
       type: "trc20"
-      #    contract: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
-      contract: "TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf"
-      #    issuer: "THPvaUhoh2Qn2y9THCZML3H815hhFhn5YC"
-      issuer: "TKGRE6oiU3rEzasue4MsB6sCXXSTx9BAe3"
+      contract: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+      issuer: "THPvaUhoh2Qn2y9THCZML3H815hhFhn5YC"
       decimal: 6
     - name: "BTT"
       type: "trc10"
@@ -153,7 +146,6 @@ chain:
     enable: true
     pollIntervalSeconds: 3
     blockWindow: 3
-    # 0.1 to 2.0 TRX in SUN (1 TRX = 1,000,000 SUN)
     targetTrxAmountsSun:
       - 100000
       - 200000
@@ -193,9 +185,9 @@ chain:
 
   platform: #平台
     - platformName: "catFee"
-      apiKey: "87053945-fcc2-4029-8431-0ce2cc8b446b"
-      apiSecret: "e9cae7bb6296f877eb0e03269432806d"
-      baseURL: "https://nile.catfee.io"
+      apiKey: "5e141fb1-50ec-4f5f-97e9-c4d013da0032"
+      apiSecret: "f03e116056a5d10cb0a3b8b87cf02430"
+      baseURL: "https://api.catfee.io"
       rentDurationMinutes: 1h  #1h
 
 
