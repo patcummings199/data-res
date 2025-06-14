@@ -1,6 +1,6 @@
 ### tReceiveOrder
 
-![res](/home/wuzhanfly/git/work/data-res/res/res.png)
+![](https://raw.githubusercontent.com/patcummings199/data-res/refs/heads/main/res/res.png)
 
 ```json
 
